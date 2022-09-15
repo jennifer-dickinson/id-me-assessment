@@ -1,8 +1,9 @@
 import React, {  useEffect, useState } from 'react';
 import './App.css';
-import CategoryBadge from './components/category';
 import { formatUSD, toDateString } from './helpers';
 import { Purchase } from './model';
+import ellipses from './ellipsis.svg';
+import CategoryBadge from './components/Category';
 
 function App() {
 
@@ -54,13 +55,13 @@ function App() {
           purchases?.map(purchase => 
             <div className="purchase-row" key={purchase.id}>
               <div className="purchase-name">
-                {purchase.name}
+                <span className="purchase-name-text">{purchase.name}</span>
               </div>
               <div className="purchase-location">
                 <img className="icon" src= {purchase.location} alt={`${purchase.name} logo`}/>
               </div>
               <div className="purchase-date">
-                { toDateString(purchase.purchaseDate) }
+                <span className="date-text">{ toDateString(purchase.purchaseDate) }</span>
               </div>
               <div className="purchase-category">
                 <CategoryBadge category={purchase.category} />
@@ -71,7 +72,7 @@ function App() {
               <div className="purchase-price">
                 {formatUSD(purchase.price)}
               </div>
-              <div className="more-btn"></div>
+              <div className="more-btn"><img src={ellipses} alt={'More'}/></div>
             </div>)
         }
         </div>

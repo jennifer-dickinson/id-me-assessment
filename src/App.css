@@ -25,14 +25,6 @@ h1 {
 }
 
 
-.purchase-row {
-  border: 1px solid var(--light-grey);
-  border-radius: 4px;
-  margin-bottom: 9px;
-  padding: 16px 24px;
-
-}
-
 .purchase-name {
   text-transform: capitalize;
   font-weight: bold;
@@ -46,13 +38,13 @@ h1 {
 }d
 
 .purchase-price {
-  font-weight: bold;
+  font-weight: 700;
 }
 
-.purchase-location img.icon{
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
+.more-btn {
+  align-items: right;
+  justify-content: right;
+  text-align: right;
 }
 
 .header.purchase-row {
@@ -62,37 +54,70 @@ h1 {
 @media only screen and (max-width: 959px) {
   .purchase-row {
     display: grid;
-    grid-template-columns: [col1] 60px [col2] 3fr [col3] 10%;
-    grid-template-rows: [row1] 33% [row2] 33% [row3] 33%;
+    align-items: center;
+    grid-template-columns: [col1] 30px [col2] auto [col3] 20%;
+    grid-template-rows: [row1] 30px [row2] auto [row3] auto;
     grid-template-areas:
       "logo name price"
       "description description description"
-      "date date date"
+      "date date date";
 
+      border-radius: 4px;
+      margin-bottom: 9px;
+      padding: 16px 24px;
+      align-items: center;
+      border: 1px solid var(--light-grey);
   }
+
   .purchase-category {
     display: none;
   }
   .purchase-location {
     grid-area: logo;
   }
+
+  .purchase-location img.icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+}
+
   .purchase-name {
     grid-area: name;
     align-items: center;
     justify-items: center;
+    padding-left: 10px;
   }
+  
   .purchase-price {
+    font-weight: 700;
+    text-align: right;
     grid-area: price;
     flex: 1 0;
   }
 
+  .date-text::before {
+    content: "Purchase Date\a";
+    font-weight: 600;
+    white-space: pre;
+  }
+
+  .purchase-date {
+    grid-area: date;
+  }
   .purchase-description {
     grid-area: description;
+    padding-top: 9px;
+    padding-bottom: 27px;
+  }
+  .more-btn {
+    display: none;
   }
   
 }
 
 @media only screen and (min-width: 960px) {
+
   .App {
     min-width: 800px;
     max-width: 1050px;
@@ -108,19 +133,29 @@ h1 {
     font-weight: 700;
   }
 
+  .purchase-location img.icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;  
+  }
+
   #purchase-container {
     border: 1px solid var(--light-grey);
     border-radius: 4px;
   }
-
+ 
   .purchase-row {
+    border: 1pdx solid --var(light-grey);
     padding-left: 60px;
     display: grid;
-    grid-template-columns: [first] 15% [line2] 15% [line3] 15% [line4] 15% [line5] 20% [line6] 15% [line7] 5%
+    grid-template-columns: [first] 15% [line2] 15% [line3] 15% [line4] 15% [line5] 20% [line6] 15% [line7] 5%;
+    border-radius: 4px;
+    margin-bottom: 9px;
+    padding: 16px 24px;
+    align-items: center;
   }
 
   .purchase-row div {
-    /* border: 1px solid black; */
     margin: 10px;
   }
 
