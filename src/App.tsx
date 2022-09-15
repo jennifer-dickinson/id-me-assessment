@@ -1,26 +1,28 @@
-import React, {  useEffect, useState } from 'react';
-import './App.css';
-import { formatUSD, toDateString } from './helpers';
-import { Purchase } from './model';
-import ellipses from './ellipsis.svg';
-import CategoryBadge from './components/Category';
+import React, { useEffect, useState } from 'react'
+import './App.css'
+import { decodeHTMLEntities, formatUSD, toDateString } from './helpers'
+import { Purchase } from './model'
+import ellipses from './images/ellipsis.svg'
+import CategoryBadge from './components/CategoryBadge'
 
-function App() {
-
-  const [purchases, setPurchases] = useState<Purchase[]>();
+const App: React.FC = () => {
+  const [purchases, setPurchases] = useState<Purchase[]>()
 
   useEffect(() => {
-    fetch('https://idme-interview.herokuapp.com/').then(res => 
-      res.json()
+    fetch('https://idme-interview.herokuapp.com/').then(async res =>
+      await res.json()
     ).then((data) => {
       console.log(data)
       const mappedData = data.map((purchase: Purchase) => ({
         ...purchase,
         purchaseDate: new Date(purchase.purchaseDate)
       }))
-      setPurchases(mappedData as Purchase[]);
+
+      setPurchases(mappedData as Purchase[])
+    }).catch(reason => {
+      setPurchases([])
     })
-  })
+  }, [])
 
   return (
     <div className="App">
@@ -52,7 +54,7 @@ function App() {
             </div>
 
         {
-          purchases?.map(purchase => 
+          purchases?.map(purchase =>
             <div className="purchase-row" key={purchase.id}>
               <div className="purchase-name">
                 <span className="purchase-name-text">{purchase.name}</span>
@@ -61,13 +63,15 @@ function App() {
                 <img className="icon" src= {purchase.location} alt={`${purchase.name} logo`}/>
               </div>
               <div className="purchase-date">
-                <span className="date-text">{ toDateString(purchase.purchaseDate) }</span>
+                <span className="date-text">
+                  {toDateString(purchase.purchaseDate)}
+                </span>
               </div>
               <div className="purchase-category">
                 <CategoryBadge category={purchase.category} />
               </div>
-              <div className="purchase-description" dangerouslySetInnerHTML={{__html:purchase.description}}>
-                {/* {purchase.description} */}
+              <div className="purchase-description">
+                {decodeHTMLEntities(purchase.description)}
               </div>
               <div className="purchase-price">
                 {formatUSD(purchase.price)}
@@ -77,7 +81,7 @@ function App() {
         }
         </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
