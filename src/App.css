@@ -1,38 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
+:root {
+  --light-grey: #E7E7ED;
+}
+
+
+html, body {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+}
+
 .App {
-  text-align: center;
+  padding: 15px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 125%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.purchase-row {
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  margin-bottom: 9px;
+  padding: 16px 24px;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.purchase-name {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.purchase-category {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: horizontal;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-start;
+}d
+
+.purchase-price {
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.purchase-location img.icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header.purchase-row {
+  display: none;
 }
+
+@media only screen and (max-width: 959px) {
+  .purchase-row {
+    display: grid;
+    grid-template-columns: [col1] 60px [col2] 3fr [col3] 10%;
+    grid-template-rows: [row1] 33% [row2] 33% [row3] 33%;
+    grid-template-areas:
+      "logo name price"
+      "description description description"
+      "date date date"
+
+  }
+  .purchase-category {
+    display: none;
+  }
+  .purchase-location {
+    grid-area: logo;
+  }
+  .purchase-name {
+    grid-area: name;
+    align-items: center;
+    justify-items: center;
+  }
+  .purchase-price {
+    grid-area: price;
+    flex: 1 0;
+  }
+
+  .purchase-description {
+    grid-area: description;
+  }
+  
+}
+
+@media only screen and (min-width: 960px) {
+  .App {
+    min-width: 800px;
+    max-width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .header.purchase-row {
+    display: grid;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--light-grey);
+    font-weight: 700;
+  }
+
+  #purchase-container {
+    border: 1px solid var(--light-grey);
+    border-radius: 4px;
+  }
+
+  .purchase-row {
+    padding-left: 60px;
+    display: grid;
+    grid-template-columns: [first] 15% [line2] 15% [line3] 15% [line4] 15% [line5] 20% [line6] 15% [line7] 5%
+  }
+
+  .purchase-row div {
+    /* border: 1px solid black; */
+    margin: 10px;
+  }
+
+  .purchase-row div:last-of-type {
+    margin: 0;
+  }
+  
+}  
+
